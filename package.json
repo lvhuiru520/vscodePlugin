@@ -20,6 +20,20 @@
       {
         "command": "any-command.openInTerminal",
         "title": "在 Terminal 中打开当前项目"
+      },
+      {
+        "command": "any-command.openGitGraph",
+        "title": "打开git graph"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "any-command.openGitGraph",
+        "key": "alt+f2"
+      },
+      {
+        "command": "any-command.openGitGraph",
+        "key": "cmd+f2"
       }
     ]
   },

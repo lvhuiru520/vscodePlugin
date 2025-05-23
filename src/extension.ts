@@ -56,7 +56,17 @@ export function activate(context: vscode.ExtensionContext) {
       });
     }
   );
-  context.subscriptions.push(openInIDEACommand, openInTerminal);
+  const openGitGraph = vscode.commands.registerCommand(
+    "any-command.openGitGraph",
+    () => {
+      vscode.commands.executeCommand("git-graph.view").then(
+        () => vscode.window.showInformationMessage("Git Graph opened"),
+        (err) =>
+          vscode.window.showErrorMessage(`Failed to open Git Graph: ${err}`)
+      );
+    }
+  );
+  context.subscriptions.push(openInIDEACommand, openInTerminal, openGitGraph);
 }
 
 export function deactivate() {}
