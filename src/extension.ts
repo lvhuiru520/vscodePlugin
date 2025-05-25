@@ -56,6 +56,38 @@ export function activate(context: vscode.ExtensionContext) {
       });
     }
   );
+  const openInExplorer = vscode.commands.registerCommand(
+    "any-command.openInExplorer",
+    () => {
+      const folders = vscode.workspace.workspaceFolders;
+      if (!folders || folders.length === 0) {
+        vscode.window.showErrorMessage("No workspace is open.");
+        return;
+      }
+
+      const folderPath = folders[0].uri.fsPath;
+      const platform = os.platform();
+
+      let openCommand = "";
+
+      if (platform === "darwin") {
+        openCommand = `open "${folderPath}"`;
+      } else if (platform === "win32") {
+        openCommand = `explorer "${folderPath}"`;
+      } else {
+        openCommand = `xdg-open "${folderPath}"`;
+      }
+
+      exec(openCommand, (error, stdout, stderr) => {
+        if (error) {
+          vscode.window.showErrorMessage(
+            `Failed to open folder: ${stderr || error.message}`
+          );
+          return;
+        }
+      });
+    }
+  );
   const openGitGraph = vscode.commands.registerCommand(
     "any-command.openGitGraph",
     () => {
@@ -66,7 +98,13 @@ export function activate(context: vscode.ExtensionContext) {
       );
     }
   );
-  context.subscriptions.push(openInIDEACommand, openInTerminal, openGitGraph);
+
+  context.subscriptions.push(
+    openInIDEACommand,
+    openInTerminal,
+    openGitGraph,
+    openInExplorer
+  );
 }
 
 export function deactivate() {}
