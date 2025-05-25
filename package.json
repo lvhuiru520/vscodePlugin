@@ -1,7 +1,7 @@
 {
   "name": "any-command",
   "displayName": "any-command",
-  "description": "做你想做的command",
+  "description": "想要什么自己实现",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.90.0"
@@ -9,6 +9,7 @@
   "categories": [
     "Other"
   ],
+  "publisher": "lv",
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
@@ -20,6 +21,10 @@
       {
         "command": "any-command.openInTerminal",
         "title": "在 Terminal 中打开当前项目"
+      },
+      {
+        "command": "any-command.openInExplorer",
+        "title": "在 explorer 里打开当前项目"
       },
       {
         "command": "any-command.openGitGraph",
@@ -38,8 +43,7 @@
     ]
   },
   "scripts": {
-    "package": "vsce package",
-    "vscode:prepublish": "yarn run package",
+    "package": "vsce package --no-yarn",
     "compile": "webpack",
     "watch": "webpack --watch",
     "build-package": "webpack --mode production --devtool hidden-source-map",
