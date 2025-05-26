@@ -3,6 +3,10 @@
   "displayName": "any-command",
   "description": "想要什么自己实现",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lvhuiru520/vscodePlugin.git"
+  },
   "engines": {
     "vscode": "^1.90.0"
   },
